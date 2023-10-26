@@ -1,5 +1,28 @@
 #!/bin/bash
 
+#My custumise to fix
+
+# apk add bind-tools
+# apk add nmap
+# apk add lynx
+# apk add chromium
+# 
+# 
+#  [*] gowitness          [NO]
+#  [*] Findomain          [NO]
+#  [*] unimap             [NO]
+#  [*] urldedupe  [NO]
+# 
+#  [*] naabu      [NO] * 
+# 
+#  [*] nmap       [NO]
+#  [*] dig        [NO]
+#  [*] lynx       [NO]
+#  [*] host       [NO]
+#  [*] chromium   [NO]
+#  [*] whatweb  [NO] * no found in apk 
+
+
 # interlaces fix https://github.com/codingo/Interlace/issues/156
 eval . ./config.conf # defaul config file
 
