@@ -33,7 +33,7 @@ function help(){
 	echo ""
 	echo "  -d, --domain 		<domain> 	domain target 'example.com' "
 	echo "  -m, --company 	<name>		copany name 'Tesla inc' see https://www.whoxy.com/tesla.com"
-	echo "  -x, --scope 		<scope.txt> 	Out of Scope format \.vk.com clear vk subdomain \vk.com clear all vk.com"
+	print "  -x, --scope 		<scope.txt> 	Out of Scope format \.vk.com clear vk subdomain \vk.com clear all vk.com"
 	echo "  -g, --config		<config.conf>	config file '-g dir/config2.conf' "
 	echo "  -c, --cookie 		<cookie>  	cookie -c 'PHPSESSIONID=qweqweqwe'"
 	echo "  -cidr, --cidr		<ip range>	target ip range 192.49,128.0/16"
