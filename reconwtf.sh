@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #My custumise to fix
-
+# skip go install == >  https://github.com/moaad-studies/recon-tools/
 # apk add bind-tools
 # apk add nmap
 # apk add lynx
