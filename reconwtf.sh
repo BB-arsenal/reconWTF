@@ -239,7 +239,7 @@ done
 # определяем глобальные переменные
 echo "Version: $reconWTF_version"
 if [[ -n $cookie ]]; then # если были переданы куки то записываем куки с хедером
-	header_cookie=$(echo "Cooke: $cookie") # записываем куку в переменнуж с Cookie:
+	header_cookie=$(echo "Cookie: $cookie") # записываем куку в переменнуж с Cookie:
 fi 
 
 # переопределяем переменную recon_dir папки рекона если передано имя программы
