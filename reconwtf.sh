@@ -532,11 +532,12 @@ function install_tools(){
 		eval $SUDO pacman -Syu --noconfirm $DEBUG_STD
 		eval $SUDO pacman -S --noconfirm --overwrite  python3 whatweb parallel go python python-pip base-devel gcc cmake ruby git curl libpcap wget zip nmap chromium lynx pv bind openssl libffi libxml2 libxslt zlib nmap jq tor medusa xorg-server-xvfb -y $DEBUG_STD
     	#eval $SUDO systemctl enable --now tor.service $DEBUG_STD
-	elif [ -f /etc/os-release ]; then install_yum;  #/etc/os-release fall in yum for some RedHat and Amazon Linux instances
-		printf "${bblue} Выполняется: Установка системных пакетов yum ${reset}\n\n"
-		eval $SUDO yum groupinstall "Development Tools" -y $DEBUG_STD
-    	eval $SUDO yum install chromium python3 python3-pip whatweb gcc cmake ruby git curl libpcap-dev wget zip python3-devel pv bind-utils libopenssl-devel libffi-devel libxml2-devel libxslt-devel zlib-devel nmap jq lynx tor medusa xorg-x11-server-xvfb prips -y $DEBUG_STD
-	fi
+	#TODO: Not work for Alpine & Ubuntu dist. 
+	# elif [ -f /etc/os-release ]; then install_yum;  #/etc/os-release fall in yum for some RedHat and Amazon Linux instances
+	# 	printf "${bblue} Выполняется: Установка системных пакетов yum ${reset}\n\n"
+	# 	eval $SUDO yum groupinstall "Development Tools" -y $DEBUG_STD
+    # 	eval $SUDO yum install chromium python3 python3-pip whatweb gcc cmake ruby git curl libpcap-dev wget zip python3-devel pv bind-utils libopenssl-devel libffi-devel libxml2-devel libxslt-devel zlib-devel nmap jq lynx tor medusa xorg-x11-server-xvfb prips -y $DEBUG_STD
+	# fi
 
 	eval git config --global --unset http.proxy $DEBUG_STD
 	eval git config --global --unset https.proxy $DEBUG_STD
@@ -550,7 +551,7 @@ version=$(curl -L -s "https://go.dev/VERSION?m=text" | head -n 1)
 printf "${bblue} Запуск: установка/обновление Golang ${reset}\n\n"
 if [[ $(eval type go $DEBUG_ERROR | grep -o 'go is') == "go is" ]] && [ "$version" = $(go version | cut -d " " -f3) ]
     then
-        printf "${bgreen} Golang уже установлен и обновлен. ${reset}\n\n"
+        printf "${bgreen} Golang has already been installed and updated. ${reset}\n\n"
     else
         eval $SUDO rm -rf /usr/local/go $DEBUG_STD
         if [ "True" = "$IS_ARM" ]; then
@@ -581,7 +582,7 @@ if [[ $(eval type go $DEBUG_ERROR | grep -o 'go is') == "go is" ]] && [ "$versio
         export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$PATH
 		
 go_text_check=$(cat ~/${profile_shell} | grep "export GOROOT=/usr/local/go")
-# проверяем установлен ли голанд в профиле
+# check whether Goland is installed in the profile
 if [[ $go_text_check == "export GOROOT=/usr/local/go" ]]; then
     echo "go ur exposts install"
 else
@@ -597,9 +598,9 @@ fi
 
 fi
 
-[ -n "$GOPATH" ] || { printf "${bred} Переменная окружения GOPATH не обнаружена, добавьте переменные окружения Golang в свой \$HOME/.bashrc or \$HOME/.zshrc:\n\n export GOROOT=/usr/local/go\n export GOPATH=\$HOME/go\n export PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH\n\n"; exit 1; }
-[ -n "$GOROOT" ] || { printf "${bred} Переменная окружения GOROOT не обнаружена, добавьте переменные окружения Golang в свой \$HOME/.bashrc or \$HOME/.zshrc:\n\n export GOROOT=/usr/local/go\n export GOPATH=\$HOME/go\n export PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH\n\n"; exit 1; }
-printf "${bblue} Выполняется: установка требований ${reset}\n\n"
+[ -n "$GOPATH" ] || { printf "${bred} Gopath environment is not found, add Golang environment variables to your \$HOME/.bashrc or \$HOME/.zshrc:\n\n export GOROOT=/usr/local/go\n export GOPATH=\$HOME/go\n export PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH\n\n"; exit 1; }
+[ -n "$GOROOT" ] || { printf "${bred} Goroot surroundings are not detected, add Golang environment variables to your \$HOME/.bashrc or \$HOME/.zshrc:\n\n export GOROOT=/usr/local/go\n export GOPATH=\$HOME/go\n export PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH\n\n"; exit 1; }
+printf "${bblue} Completed: Installation of requirements ${reset}\n\n"
 
 mkdir -p ~/.gf
 mkdir -p $tools
@@ -2499,7 +2500,7 @@ MULTILINE-COMMENT
 		github_dorks
 		metadata
 		clearempity
-	elif [[ -n $subdomain_serch ]]; then # найти субдомены всеми сканированиями и пасивно и активно
+	elif [[ -n $subdomain_serch ]]; then # Find subdomains with all scans and passively and actively
 		Subdomain_enum_passive
 		Subdomain_enum
 		subdomain_permytation
@@ -2520,4 +2521,4 @@ MULTILINE-COMMENT
 	fi
 }
 
-init # запуск главной функции
+init # Launch of the main function
